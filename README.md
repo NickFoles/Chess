@@ -1,2 +1,0 @@
-# Chess
-Chess for swope
