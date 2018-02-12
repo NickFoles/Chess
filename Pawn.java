@@ -6,7 +6,7 @@
 public class Pawn extends Piece {
 	// constructors
 	public Pawn(){
-		super(0, "");
+		super(0, "images/pawn1.png");
 	}
 	public Pawn(int player){
 		super(0);
