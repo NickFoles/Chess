@@ -8,11 +8,9 @@ public class Pawn extends Piece {
 	public Pawn(){
 		super(0, "");
 	}
-	
 	public Pawn(int player){
 		super(0);
 	}
-	
 	public Pawn(int player, String imagepath){
 		super(player, imagepath);
 	}
