@@ -1,7 +1,12 @@
 
 public class King extends Piece{
 
-
+	public King(){
+		this(0);
+	}
+	public King(int player){
+		this(player, "images2/king1.jpg");
+	}
 	public King(int player, String imagePath){
 		super(player, imagePath);
 	}
