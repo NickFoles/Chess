@@ -4,9 +4,16 @@
 // date: 1/18/18
 public class Queen extends Piece {
 	// constructors
-	public Queen(int player) {	
-		super(player);
-		setImageIcon("images/queen1.png");
+	public Queen(){
+		super(0, "images/queen1.png");
+	}
+	
+	public Queen(int player){
+		super(0);
+	}
+	
+	public Queen(String imagepath, int player){
+		super(player, imagepath);
 	}
 	
 	// method: isValidMove
