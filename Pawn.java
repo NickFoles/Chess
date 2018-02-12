@@ -23,26 +23,26 @@ public class Pawn extends Piece {
 		// White
 		// Initial movement: Two spaces in front or one space in front valid -> if spots are open / desired location is not taken
 		if(getPlayer() == 1 && from.getRow() == 6 && !(b[to.getRow()][to.getColumn()].getPlayer() == 1) ||
-				b[to.getRow()][to.getColumn() - 2] == null || b[to.getRow()][to.getColumn() - 1] == null) {
+				b[to.getRow() - 2][to.getColumn()].getPlayer() == 0 || b[to.getRow() - 1][to.getColumn()].getPlayer() == 0) {
 			return true;
 		}
 
 		// Attacking diagonally - if a black piece is in the position then the move is valid, or if the spot is empty
 		else if(getPlayer() == 1 && b[Math.abs(from.getRow() - to.getRow())][Math.abs(from.getColumn() - to.getColumn())].getPlayer() == 2 || 
-				b[Math.abs(from.getRow() - to.getRow())][Math.abs(from.getColumn() - to.getColumn())] == null) {
+				b[Math.abs(from.getRow() - to.getRow())][Math.abs(from.getColumn() - to.getColumn())].getPlayer() == 0 {
 			return true;
 		}
 
 		// Black
 		// Initial movement: Two spaces in front or one space in front valid -> if spots are open / desired location is not taken
 		if(getPlayer() == 2 && from.getRow() == 1 && !(b[to.getRow()][to.getColumn()].getPlayer() == 2) || 
-				b[to.getRow()][to.getColumn() + 2] == null || b[to.getRow()][to.getColumn() + 1] == null) {
+				b[to.getRow() + 2][to.getColumn()].getPlayer() == 0 || b[to.getRow() + 1][to.getColumn()].getPlayer() == 0) {
 			return true;
 		}
 
 		// Attacking diagonally - if a white piece is in the position then the move is valid, or if the spot is empty
 		else if(getPlayer() == 2 && b[Math.abs(from.getRow() - to.getRow())][Math.abs(from.getColumn() - to.getColumn())].getPlayer() == 1 || 
-				b[Math.abs(from.getRow() - to.getRow())][Math.abs(from.getColumn() - to.getColumn())] == null) {
+				b[Math.abs(from.getRow() - to.getRow())][Math.abs(from.getColumn() - to.getColumn())].getPlayer() == 0) {
 			return true;
 		}
 
