@@ -13,7 +13,7 @@ public class Pawn extends Piece {
 		super(0);
 	}
 	
-	public Pawn(String imagepath, int player){
+	public Pawn(int player, String imagepath){
 		super(player, imagepath);
 	}
 
