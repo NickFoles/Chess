@@ -5,9 +5,16 @@
 
 public class Pawn extends Piece {
 	// constructors
-	public Pawn(int player) {
-		super(player);
-		setImageIcon("images/pawn1.jpg");
+	public Pawn(){
+		super(0, "");
+	}
+	
+	public Pawn(int player){
+		super(0);
+	}
+	
+	public Pawn(String imagepath, int player){
+		super(player, imagepath);
 	}
 
 	// method: isValidMove
