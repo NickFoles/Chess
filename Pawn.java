@@ -53,15 +53,15 @@ public class Pawn extends Piece {
 				return true;
 		else if(getPlayer() == 1 && to.getRow() == from.row - 1 && from.column == to.column && b[to.row][to.column].getPlayer() == 0)
 			return true;
-		else if(getPlayer() == 1 && to.row == from.row - 1 && to.getColumn() == (from.column + 1 | from.column - 1))
+		else if(getPlayer() == 1 && to.row == from.row - 1 && to.getColumn() == (from.column + 1 | from.column - 1) && b[to.row][to.column].getPlayer() == 2)
 			return true;
 		else if(getPlayer() == 2 && from.row == 1 && to.getRow() == (from.row + 1 | from.row + 2) && from.column == to.column && b[to.row][to.column].getPlayer() == 0)
 				return true;
 		else if(getPlayer() == 2 && to.getRow() == from.row + 1 && from.column == to.column && b[to.row][to.column].getPlayer() == 0)
 			return true;
-		else if(getPlayer() == 2 && to.row == from.row + 1 && to.getColumn() == (from.column + 1 | from.column - 1))
+		else if(getPlayer() == 2 && to.row == from.row + 1 && to.getColumn() == (from.column + 1 | from.column - 1) && b[to.row][to.column].getPlayer() == 1)
 			return true;
-
+		
 		return false;
 	}
 }
