@@ -61,9 +61,6 @@ public class Pawn extends Piece {
 			return true;
 		else if(getPlayer() == 2 && to.row == from.row + 1 && to.getColumn() == (from.column + 1 | from.column - 1))
 			return true;
-		
-		return false;
-	}
 
 		return false;
 	}
