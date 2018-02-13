@@ -60,17 +60,17 @@ public class GraphicsPanel extends JPanel implements MouseListener {
 
 		board = new Piece[8][8];
 
-		board[0][0] = new Piece(1, "images2/rook1.png");
-		board[0][1] = new Piece(1, "images2/knight1.png");
-		board[0][2] = new Piece(1, "images2/bishop1.png");
-		board[0][3] = new Piece(1, "images2/king1.png");
-		board[0][4] = new Piece(1, "images2/queen1.png");
-		board[0][5] = new Piece(1, "images2/bishop1.png");
-		board[0][6] = new Piece(1, "images2/knight1.png");
-		board[0][7] = new Piece(1, "images2/rook1.png");
+		board[0][0] = new Rook(1, "images2/rook1.png");
+		board[0][1] = new Knight(1, "images2/knight1.png");
+		board[0][2] = new Bishop(1, "images2/bishop1.png");
+		board[0][3] = new King(1, "images2/king1.png");
+		board[0][4] = new Queen(1, "images2/queen1.png");
+		board[0][5] = new Bishop(1, "images2/bishop1.png");
+		board[0][6] = new Knight(1, "images2/knight1.png");
+		board[0][7] = new Rook(1, "images2/rook1.png");
 
 		for (int i = 0; i < 8; i++) {
-			board[1][i] = new Piece(1, "images2/pawn1.png");
+			board[1][i] = new Pawn(1, "images2/pawn1.png");
 		}
 
 		for (int i = 2; i <= 5; i++) {
@@ -80,17 +80,17 @@ public class GraphicsPanel extends JPanel implements MouseListener {
 		}
 
 		for (int i = 0; i < 8; i++) {
-			board[6][i] = new Piece(-1, "images2/pawn2.png");
+			board[6][i] = new Pawn(-1, "images2/pawn2.png");
 		}
 
-		board[7][0] = new Piece(-1, "images2/rook2.png");
-		board[7][1] = new Piece(-1, "images2/knight2.png");
-		board[7][2] = new Piece(-1, "images2/bishop2.png");
-		board[7][3] = new Piece(-1, "images2/king2.png");
-		board[7][4] = new Piece(-1, "images2/queen2.png");
-		board[7][5] = new Piece(-1, "images2/bishop2.png");
-		board[7][6] = new Piece(-1, "images2/knight2.png");
-		board[7][7] = new Piece(-1, "images2/rook2.png");
+		board[7][0] = new Rook(-1, "images2/rook2.png");
+		board[7][1] = new Knight(-1, "images2/knight2.png");
+		board[7][2] = new Bishop(-1, "images2/bishop2.png");
+		board[7][3] = new King(-1, "images2/king2.png");
+		board[7][4] = new Queen(-1, "images2/queen2.png");
+		board[7][5] = new Bishop(-1, "images2/bishop2.png");
+		board[7][6] = new Knight(-1, "images2/knight2.png");
+		board[7][7] = new Rook(-1, "images2/rook2.png");
 
 		// instantiate the instance variables.
 	}
@@ -126,7 +126,7 @@ public class GraphicsPanel extends JPanel implements MouseListener {
 				g2.fillRect(i * SQUARE_WIDTH + OFFSET, j * SQUARE_WIDTH + OFFSET, SQUARE_WIDTH, SQUARE_WIDTH);
 			}
 
-		if(/*turnNum>=0 &&*/ (turn == board[from.getRow()][from.getColumn()].getPlayer())){
+		if((turn == board[from.getRow()][from.getColumn()].getPlayer())){
 		g2.setColor(Color.magenta);
 		g2.fillRect((colorSquare.getColumn()*90)+30, (colorSquare.getRow()*90)+30, 90, 90);
 		}
@@ -166,7 +166,7 @@ public class GraphicsPanel extends JPanel implements MouseListener {
 			System.out.println(to.getRow());
 			System.out.println(to.getColumn());
 
-			if (board[(((e.getY() + 60) / 90) - 1)][(((e.getX() + 60) / 90) - 1)].isValidMove(from, to, board)
+			if (board[(((e.getY() + 60) / 90) - 1)][(((e.getX() + 60) / 90) - 1)].isValidMove(to, from, board)
 					) {
 				
 	
@@ -176,10 +176,10 @@ public class GraphicsPanel extends JPanel implements MouseListener {
 				board[to.getRow()][to.getColumn()] = board[from.getRow()][from.getColumn()];
 				board[from.getRow()][from.getColumn()] = new Piece(0, "images2/space.png");
 	
-				
+					click = false;
 			}
 
-			click = false;
+		
 			
 
 		}
