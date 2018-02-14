@@ -85,6 +85,10 @@ public class Pawn extends Piece {
 				b[to.getRow()][to.getColumn()].getPlayer() == 0) {
 			return true;
 		}
+		// Can't get piece if it's just in front
+		else if(b[to.getRow() - 1][to.column].getPlayer() != getPlayer() || b[to.getRow() - 2][to.getColumn()].getPlayer() != getPlayer()) {
+			return false;
+		}
 
 		// Black
 		// Cannot move rows originally
@@ -107,6 +111,10 @@ public class Pawn extends Piece {
 		if(getPlayer() == 2 && Math.abs(to.getColumn() - from.getColumn()) == 1 || Math.abs(to.getRow() - from.getRow()) == 1 &&
 				b[to.getRow()][to.getColumn()].getPlayer() == 0) {
 			return true;
+		}
+		// Can't get piece if it's just in front
+		else if(b[to.getRow() + 1][to.column].getPlayer() != getPlayer() || b[to.getRow() + 2][to.getColumn()].getPlayer() != getPlayer()) {
+			return false;
 		}
 		
 		return false;
