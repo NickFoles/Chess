@@ -46,21 +46,68 @@ public class Pawn extends Piece {
 // 			return true;
 // 		}
 		
-			// Code 2
-			if(b[to.row][to.column].getPlayer() == getPlayer())
-			return false;
-		if(getPlayer() == 1 && from.row == 6 && to.getRow() == (from.row - 1 | from.row - 2) && from.column == to.column && b[to.row][to.column].getPlayer() == 0)
-				return true;
-		else if(getPlayer() == 1 && to.getRow() == from.row - 1 && from.column == to.column && b[to.row][to.column].getPlayer() == 0)
+// 			// Code 2
+// 			if(b[to.row][to.column].getPlayer() == getPlayer())
+// 			return false;
+// 		if(getPlayer() == 1 && from.row == 6 && to.getRow() == (from.row - 1 | from.row - 2) && from.column == to.column && b[to.row][to.column].getPlayer() == 0)
+// 				return true;
+// 		else if(getPlayer() == 1 && to.getRow() == from.row - 1 && from.column == to.column && b[to.row][to.column].getPlayer() == 0)
+// 			return true;
+// 		else if(getPlayer() == 1 && to.row == from.row - 1 && to.getColumn() == (from.column + 1 | from.column - 1) && b[to.row][to.column].getPlayer() == 2)
+// 			return true;
+// 		else if(getPlayer() == 2 && from.row == 1 && to.getRow() == (from.row + 1 | from.row + 2) && from.column == to.column && b[to.row][to.column].getPlayer() == 0)
+// 				return true;
+// 		else if(getPlayer() == 2 && to.getRow() == from.row + 1 && from.column == to.column && b[to.row][to.column].getPlayer() == 0)
+// 			return true;
+// 		else if(getPlayer() == 2 && to.row == from.row + 1 && to.getColumn() == (from.column + 1 | from.column - 1) && b[to.row][to.column].getPlayer() == 1)
+// 			return true;
+		
+		// Code 3
+				// White
+		// Cannot move rows originally
+		if(getPlayer() == 1 && from.getRow() > to.getRow() || to.getRow() > from.getRow()) {
 			return true;
-		else if(getPlayer() == 1 && to.row == from.row - 1 && to.getColumn() == (from.column + 1 | from.column - 1) && b[to.row][to.column].getPlayer() == 2)
+		}
+
+		// Not taking a piece
+		else if(getPlayer() == 1 && from.getColumn() == to.getColumn() && !(b[from.getRow()+1][from.getColumn()].getPlayer() == 0)) {
 			return true;
-		else if(getPlayer() == 2 && from.row == 1 && to.getRow() == (from.row + 1 | from.row + 2) && from.column == to.column && b[to.row][to.column].getPlayer() == 0)
-				return true;
-		else if(getPlayer() == 2 && to.getRow() == from.row + 1 && from.column == to.column && b[to.row][to.column].getPlayer() == 0)
+		}
+
+		// Two spaces in beginning or one space in beginning
+		else if(getPlayer() == 1 && Math.abs(to.getRow() - from.getRow()) == 2 ||
+				getPlayer() == 1 && Math.abs(to.getRow() - from.getRow()) == 1) {
 			return true;
-		else if(getPlayer() == 2 && to.row == from.row + 1 && to.getColumn() == (from.column + 1 | from.column - 1) && b[to.row][to.column].getPlayer() == 1)
+		}
+
+		// Taking a piece
+		if(getPlayer() == 1 && Math.abs(to.getColumn() - from.getColumn()) == 1 || Math.abs(to.getRow() - from.getRow()) == 1 &&
+				b[to.getRow()][to.getColumn()].getPlayer() == 0) {
 			return true;
+		}
+
+		// Black
+		// Cannot move rows originally
+		if(getPlayer() == 2 && from.getRow() > to.getRow() || to.getRow() > from.getRow()) {
+			return true;
+		}
+
+		// Not taking a piece
+		else if(getPlayer() == 2 && from.getColumn() == to.getColumn() && !(b[from.getRow()+1][from.getColumn()].getPlayer() == 0)) {
+			return true;
+		}
+
+		// Two spaces in beginning or one space in beginning
+		else if(getPlayer() == 2 && Math.abs(to.getRow() - from.getRow()) == 2 ||
+				getPlayer() == 2 && Math.abs(to.getRow() - from.getRow()) == 1) {
+			return true;
+		}
+
+		// Taking a piece
+		if(getPlayer() == 2 && Math.abs(to.getColumn() - from.getColumn()) == 1 || Math.abs(to.getRow() - from.getRow()) == 1 &&
+				b[to.getRow()][to.getColumn()].getPlayer() == 0) {
+			return true;
+		}
 		
 		return false;
 	}
