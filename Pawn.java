@@ -715,3 +715,166 @@ THIS IS THE UPDATED ONE AS OF 1:39am (2/14/18)
 		System.out.println("TruE");
 		return true;
  
+________________________________________________________________________________________________FNIAL COPY OF PAWN 2:47 Am (2/14/18)
+	
+// class: Pawn
+// written by: Group
+// description: This is the class for pawns, it extends the piece class, and overrides the piece class' isValidMove method
+// date: 2/5/18
+
+public class Pawn extends Piece {
+	// constructors
+	public Pawn() {
+		super(0, "images/pawn1.png");
+	}
+
+	public Pawn(int player) {
+		super(0);
+	}
+
+	public Pawn(int player, String imagepath) {
+		super(player, imagepath);
+	}
+
+	// Method: isValidMove
+	// Return Type: boolean - if it is a valid move, returns true
+	// if invalid move, returns false
+	// Parameters: Location from - location where pawn begins
+	// Location to - location pawn wants to move to
+	// Piece [][]b - the 2D array that contains the pieces for the board
+	// Description: Overrides piece class' isValidMove method so it is accurate
+	// for the pawn piece
+	public boolean isValidMove(Location from, Location to, Piece[][] b) {
+
+		// makes it so you can't move on top of your own teams piece
+		if (b[to.row][to.column].getPlayer() == getPlayer()) {
+			return false;
+		}
+
+		// makes it so white pawns cannot move diagonally forward if there is
+		// not a black piece
+		else if (getPlayer() == 1
+				&& (to.equals(new Location(from.row + 1, from.column - 1))
+						|| to.equals(new Location(from.row + 1, from.column + 1)))
+				&& !(b[to.row][to.column].getPlayer() == -1)) {
+			return false;
+		}
+
+		// makes it so white pawns can move diagonally forward is there is a
+		// black piece
+		else if (getPlayer() == 1
+				&& (to.equals(new Location(from.row + 1, from.column - 1))
+						|| to.equals(new Location(from.row + 1, from.column + 1)))
+				&& (b[to.row][to.column].getPlayer() == -1)) {
+
+			return true;
+		}
+
+		// makes it so black pawns cannot move diagonally forward is there is
+		// not a white piece
+		else if (getPlayer() == -1
+				&& (to.equals(new Location(from.row - 1, from.column - 1))
+						|| to.equals(new Location(from.row + 1, from.column - 1)))
+				&& !(b[to.row][to.column].getPlayer() == 1)) {
+
+			return false;
+		}
+
+		// makes it so black pawns cannot move diagonally right into an empty
+		// spot (was necessary because there was a problem with this)
+		else if (getPlayer() == -1 && to.equals(new Location(from.row - 1, from.column + 1))
+				&& b[from.row - 1][from.column + 1].getPlayer() == 0) {
+
+			return false;
+		}
+
+		// lets white pawns diagonally take black pieces
+		else if (getPlayer() == -1 && to.equals(new Location(from.row - 1, from.column + 1))
+				|| to.equals(new Location(from.row - 1, from.column - 1)) && (b[to.row][to.column].getPlayer() == 1)) {
+
+			return true;
+		}
+
+		// makes so a white pawn can only move one space outside of any special
+		// conditions
+		else if (getPlayer() == 1 && !(to.equals(new Location(from.row + 1, from.column))
+				|| to.equals(new Location(from.row + 2, from.column))
+				|| to.equals(new Location(from.row + 1, from.column - 1))
+				|| to.equals(new Location(from.row + 1, from.column + 1)))) {
+
+			return false;
+
+		}
+
+		// white pawns cannot move two forward w/ unless it is the pawns first
+		// move
+		else if (getPlayer() == 1 && to.equals(new Location(from.row, from.column + 2)) && from.column != 1) {
+
+			return false;
+
+		}
+		// white pawn cannot move forward unless there is a space in front of it
+		else if (getPlayer() == 1 && to.equals(new Location(from.row + 1, from.column))
+				&& b[to.row][to.column].getPlayer() != 0) {
+
+			return false;
+		}
+		// black pawn cannot move diagonally to the right
+		else if (getPlayer() == -1 && (to.equals(new Location(from.row - 1, from.column + 1)))) {
+
+			return false;
+		}
+		// black pawn can only move one space forward at a time unless there are
+		// extenuating circumstances
+		else if (getPlayer() == -1 && !(to.equals(new Location(from.row - 1, from.column))
+				|| to.equals(new Location(from.row - 2, from.column))
+				|| to.equals(new Location(from.row - 1, from.column - 1))
+				|| to.equals(new Location(from.row - 1, from.column + 1)))) {
+
+			return false;
+		}
+		// white pawn cannot jump over a black piece on its first move
+		else if (getPlayer() == 1 && to.equals(new Location(from.row + 2, from.column))
+				&& b[from.row + 1][from.column].getPlayer() == -1) {
+
+			return false;
+		}
+		// black cannot jump over a white piece on its first move
+		else if (getPlayer() == -1 && to.equals(new Location(from.row - 2, from.column))
+				&& b[from.row - 1][from.column].getPlayer() == 1) {
+
+			return false;
+		}
+		// another check for black pawn moving forward illegally
+		else if (getPlayer() == -1 && to.equals(new Location(from.row - 2, from.column)) && from.row != 6
+				&& !(b[5][from.column].getPlayer() == 1) || b[to.row][to.column].getPlayer() != 0) {
+
+			return false;
+		}
+		// black pawn can't move into a space that is not occupied by a space
+		// character
+		else if (getPlayer() == -1 && to.equals(new Location(from.row - 1, from.column))
+				&& b[to.row][to.column].getPlayer() != 0) {
+
+			return false;
+		}
+		// black pawn cannot move diagonally backwards into an open space
+		else if ((getPlayer() == -1) && (to.equals(new Location(from.row + 1, from.column + 1)))
+				&& b[to.row][to.column].getPlayer() == 0) {
+
+			return false;
+		}
+		// white pawn cannot move more than one space unless its the opening
+		// move
+		else if (getPlayer() == 1 && to.equals(new Location(from.row + 2, from.column)) && from.row != 1
+				|| b[to.row][to.column].getPlayer() != 0) {
+
+			return false;
+		}
+
+		// if nothing evaluates to false, and attempted move is not a special
+		// case, then isValidMove will evaluate to true
+		return true;
+
+	}
+}
