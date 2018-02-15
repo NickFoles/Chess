@@ -1,3 +1,15 @@
+// Method: isValidMove
+	// Return Type: boolean - if it is a valid move, returns true
+	//						  if invalid move, returns false
+	// Parameters: Location from - location where pawn begins
+	//			   Location to - location pawn wants to move to
+	//			   Piece [][]b - the 2D array that contains the pieces for the board
+	// Description: Overrides piece class' isValidMove method so it is accurate for the pawn piece
+
+
+
+
+
 # Compiled class file
 *.class
 
