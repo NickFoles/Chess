@@ -17,9 +17,9 @@ public class Bishop extends Piece {
 
 		//up and right
 		if(to.getColumn()>from.getColumn() && to.getRow()<from.getRow() && from.getRow() + from.getColumn() == to.getRow() + to.getColumn()){
-			column = from.column + 1;
+			column = from.column;
 			System.out.println("a");
-			for(row = from.getRow() - 1; row >= 0 && b[row][column].getPlayer() == 0; row--){
+			for(row = from.getRow() - 1; row >= 0 && b[row][column + 1].getPlayer() == 0; row--){
 				column = from.column + from.getRow() - row;
 				System.out.println(new Location(row, column));
 				if(to.equals(new Location(row, column))){
@@ -29,9 +29,9 @@ public class Bishop extends Piece {
 		}				
 		//down and left
 		else if (to.getColumn()<from.getColumn() && to.getRow()>from.getRow() && from.getRow() + from.getColumn() == to.getRow() + to.getColumn()){
-			column = from.column - 1;
+			column = from.column;
 			System.out.println("b");
-			for(row = from.getRow() + 1; row < 8 && b[row][column].getPlayer() == 0; row++){
+			for(row = from.getRow() + 1; row < 8 && b[row][column - 1].getPlayer() == 0; row++){
 				column = from.column + from.getRow() - row;
 				System.out.println(new Location(row, column));
 				if(to.equals(new Location(row, column))){
@@ -56,9 +56,9 @@ public class Bishop extends Piece {
 		}
 		//down and right
 		else if(to.getColumn()>from.getColumn() && to.getRow()>from.getRow() && from.row - from.column == to.row - to.column){
-			column = from.column + 1;
+			column = from.column;
 			System.out.println("d");
-			for(row = from.getRow() + 1; row < 8 && b[row][column].getPlayer() == 0; row++){
+			for(row = from.getRow() + 1; row < 8 && b[row][column + 1].getPlayer() == 0; row++){
 				column = from.column - from.getRow() + row;
 				System.out.println(new Location(row, column));
 				if(to.equals(new Location(row, column))){
