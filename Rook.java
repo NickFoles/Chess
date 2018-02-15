@@ -9,7 +9,7 @@ public class Rook extends Piece{
 		super(0);
 	}
 	
-	public Rook(String imagepath, int player){
+	public Rook(int player, String imagepath){
 		super(player, imagepath);
 	}
 	
