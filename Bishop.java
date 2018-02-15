@@ -10,61 +10,63 @@ public class Bishop extends Piece {
 	}
 
 	public boolean isValidMove(Location from, Location to, Piece[][] b) {
-		boolean upRight = false;
-		boolean upLeft = false;
-		boolean downRight = false;
-		boolean downLeft = false;
-		boolean inTheWay = false;
+		if(b[to.row][to.column].getPlayer() == getPlayer() || from.equals(to))
+			return false;
+		int row;
+		int column;
 
-		if (from.getRow() < to.getRow() && from.getColumn() < to.getColumn()) {
-			for (int i = from.getRow() - 1; i > to.getRow(); i--) {
-				for (int j = from.getColumn() - 1; i > to.getColumn(); i--) {
-					if (b[i][j].getPlayer() == 1 || b[i][j].getPlayer() == 2) {
-						inTheWay = true;
-					} else {
-						inTheWay = false;
-					}
+		//up and right
+		if(to.getColumn()>from.getColumn() && to.getRow()<from.getRow() && from.getRow() + from.getColumn() == to.getRow() + to.getColumn()){
+			column = from.column;
+			System.out.println("a");
+			for(row = from.getRow() - 1; row >= 0 && b[row][column + 1].getPlayer() != getPlayer() && b[row+1][column - 1].getPlayer() != getPlayer() * -1; row--){
+				column = from.column + from.getRow() - row;
+				System.out.println(new Location(row, column));
+				if(to.equals(new Location(row, column))){
+					return true;
 				}
 			}
-
-		} else if (from.getRow() > to.getRow() && from.getColumn() < to.getColumn()) {
-			for (int i = from.getRow() - 1; i > to.getRow(); i--) {
-				for (int j = from.getColumn() - 1; i < to.getColumn(); i++) {
-					if (b[i][j].getPlayer() == 1 || b[i][j].getPlayer() == 2) {
-						inTheWay = true;
-					} else {
-						inTheWay = false;
-					}
-				}
+		}				
+		//down and left
+		else if (to.getColumn()<from.getColumn() && to.getRow()>from.getRow() && from.getRow() + from.getColumn() == to.getRow() + to.getColumn()){
+			column = from.column;
+			System.out.println("b");
+			for(row = from.getRow() + 1; row < 8 && b[row][column - 1].getPlayer() != getPlayer() && b[row-1][column + 1].getPlayer() != getPlayer() * -1; row++){
+				column = from.column + from.getRow() - row;
+				System.out.println(new Location(row, column));
+				if(to.equals(new Location(row, column))){
+					return true;
+				}	
 			}
-		} else if (from.getRow() < to.getRow() && from.getColumn() > to.getColumn()) {
-			for (int i = from.getRow() - 1; i < to.getRow(); i++) {
-				for (int j = from.getColumn() - 1; i > to.getColumn(); i--) {
-					if (b[i][j].getPlayer() == 1 || b[i][j].getPlayer() == 2) {
-						inTheWay = true;
-					} else {
-						inTheWay = false;
-					}
-				}
-			}
-		} else if (from.getRow() > to.getRow() && from.getColumn() > to.getColumn()) {
-			for (int i = from.getRow() - 1; i < to.getRow(); i++) {
-				for (int j = from.getColumn() - 1; i < to.getColumn(); i++) {
-					if (b[i][j].getPlayer() == 1 || b[i][j].getPlayer() == 2) {
-						inTheWay = true;
-					} else {
-						inTheWay = false;
-					}
-				}
-			}
+			return false;
 		}
-
-		if (Math.abs(from.getColumn() - to.getColumn()) == Math.abs(from.getRow() - to.getRow())
-				&& b[to.getRow()][to.getColumn()].getPlayer() != getPlayer() && (!inTheWay)) {
-			return true;
+		//up and left
+		else if (to.getColumn()<from.getColumn() && to.getRow()<from.getRow() && from.row - from.column == to.row - to.column){
+			column = from.column;
+			System.out.println("c");
+			for(row = from.getRow() - 1; row >= 0 && b[row][column-1].getPlayer() != getPlayer() && b[row+1][column + 1].getPlayer() != getPlayer() * -1; row--){
+				column = from.column - from.getRow() + row;
+				System.out.println(new Location(row, column) + " " + b[row][column].getPlayer());
+				if(to.equals(new Location(row, column))){
+					return true;
+				}
+			}	
+			System.out.println(row + ", " + column + " " + b[row][column].getPlayer());
+			return false;
 		}
-
+		//down and right
+		else if(to.getColumn()>from.getColumn() && to.getRow()>from.getRow() && from.row - from.column == to.row - to.column){
+			column = from.column;
+			System.out.println("d");
+			for(row = from.getRow() + 1; row < 8 && b[row][column + 1].getPlayer() != getPlayer() && b[row-1][column - 1].getPlayer() != getPlayer() * -1; row++){
+				column = from.column - from.getRow() + row;
+				System.out.println(new Location(row, column));
+				if(to.equals(new Location(row, column))){
+					return true;
+				}
+			}
+			return false;
+		}
 		return false;
 	}
-
 }
