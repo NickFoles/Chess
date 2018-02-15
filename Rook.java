@@ -1,7 +1,8 @@
 // Class: Rook
 // Written by: Eun Won Chae
 // Date: 2/14/18
-// Description: The literal and metaphorical cancer of this earth
+// Description: This class defines the Rook piece in a game of chess. If a player tries to make a move that isn't within the rules of the game, they will not be
+//				able to.
 public class Rook extends Piece{
 	
 	//Constructors
@@ -17,7 +18,13 @@ public class Rook extends Piece{
 		super(player, imagepath);
 	}
 	
-	//isValidMove
+	// Method: isValidMove
+	// Return Type: boolean - if it is a valid move, returns true
+	//						  if invalid move, returns false
+	// Parameters: Location from - location where Rook begins
+	//			   Location to - location Rook wants to move to
+	//			   Piece [][]b - the 2D array that contains the pieces for the board
+	// Description: Overrides piece class' isValidMove method so it is accurate for the Rook piece
 	public boolean isValidMove(Location from, Location to, Piece[][]b){
 		//These booleans are going to be set to true if there aren't any pieces in between the origin and destination.
         boolean verticalUp = false, verticalDown = false, horizontalLeft = false, horizontalRight = false;
