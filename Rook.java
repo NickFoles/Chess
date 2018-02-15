@@ -47,6 +47,7 @@ public class Rook extends Piece{
                 	return false;
             }
         }
+        //horizontalLeft
         else if(from.getRow() == to.getRow() && from.getColumn() > to.getColumn()){
         	horizontalLeft = true;
         	for(int i = to.getColumn(); i < from.getColumn() && horizontalLeft; i++){
@@ -57,8 +58,19 @@ public class Rook extends Piece{
         			return false;
         	}
         }
+        //horizontalRight
+        else if(from.getRow() == to.getRow() && from.getColumn() < to.getColumn()){
+        	horizontalRight = true;
+        	for(int i = to.getColumn(); i > from.getColumn() && horizontalRight; i--){
+        		if(b[from.getRow()][i].getPlayer() == 0){
+        			//do nothing
+        		}
+        		else
+        			return false;
+        	}
+        }
         
-        if(verticalUp || verticalDown || horizontalLeft && finalLocation){
+        if(verticalUp || verticalDown || horizontalLeft || horizontalRight && finalLocation){
             return true;
         }
         else
