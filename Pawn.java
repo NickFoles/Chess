@@ -585,7 +585,7 @@ ________________________________________________
 		System.out.println("TruE");
 		return true;
 ______________________________________________
-
+THIS IS THE UPDATED ONE AS OF 1:39am (2/14/18)
 		// return false;
 		System.out.println("cheese" + b[to.row][to.column].getPlayer());
 		if (b[to.row][to.column].getPlayer() == getPlayer()) {
