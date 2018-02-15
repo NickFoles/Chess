@@ -20,44 +20,32 @@ public class Rook extends Piece{
         //verticalUp
         if(from.getColumn() == to.getColumn() && from.getRow() > to.getRow()){
             verticalUp = true;
-            for(int i = to.getRow(); i < from.getRow() && verticalUp; i++){
-                if(b[i][to.getColumn()].getPlayer() == 0){
-                	//do nothing
-                }
-                else
-                    verticalUp = false;
+            for(int i = to.getRow()+1; i < from.getRow() && verticalUp; i++){
+                if(b[i][to.getColumn()].getPlayer() != 0)
+                	verticalUp = false;
             }
         }
         //verticalDown
         else if(from.getColumn() == to.getColumn() && from.getRow() < to.getRow()){
         	verticalDown = true;
-            for(int i = to.getRow(); i > from.getRow() && verticalDown; i--){
-                if(b[i][from.getColumn()].getPlayer() == 0){
-                	//do nothing
-                }
-                else
+            for(int i = to.getRow()-1; i > from.getRow() && verticalDown; i--){
+                if(b[i][from.getColumn()].getPlayer() != 0)
                 	verticalDown = false;
             }
         }
         //horizontalLeft
         else if(from.getRow() == to.getRow() && from.getColumn() > to.getColumn()){
         	horizontalLeft = true;
-        	for(int i = to.getColumn(); i < from.getColumn() && horizontalLeft; i++){
-        		if(b[from.getRow()][i].getPlayer() == 0){
-        			//do nothing
-        		}
-        		else
+        	for(int i = to.getColumn()+1; i < from.getColumn() && horizontalLeft; i++){
+        		if(b[from.getRow()][i].getPlayer() != 0)
         			horizontalLeft = false;
         	}
         }
         //horizontalRight
         else if(from.getRow() == to.getRow() && from.getColumn() < to.getColumn()){
         	horizontalRight = true;
-        	for(int i = to.getColumn(); i > from.getColumn() && horizontalRight; i--){
-        		if(b[from.getRow()][i].getPlayer() == 0){
-        			//do nothing
-        		}
-        		else
+        	for(int i = to.getColumn()-1; i > from.getColumn() && horizontalRight; i--){
+        		if(b[from.getRow()][i].getPlayer() != 0)
         			horizontalRight = false;
         	}
         }
