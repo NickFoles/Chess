@@ -584,3 +584,133 @@ ________________________________________________
 
 		System.out.println("TruE");
 		return true;
+______________________________________________
+
+		// return false;
+		System.out.println("cheese" + b[to.row][to.column].getPlayer());
+		if (b[to.row][to.column].getPlayer() == getPlayer()) {
+			System.out.println("FALSE");
+			return false;
+		}
+
+		// this works
+//		if (getPlayer() == -1 && to.equals(new Location(from.row - 1, from.column + 1))
+//				&& b[to.row][to.column].getPlayer() == 1) {
+//			System.out.println("TruEEEE");
+//			return true;
+//		}
+
+		else if (getPlayer() == 1
+				&& (to.equals(new Location(from.row + 1, from.column - 1))
+						|| to.equals(new Location(from.row + 1, from.column + 1)))
+				&& !(b[to.row][to.column].getPlayer() == -1)) {
+			System.out.println("falSE");
+			return false;
+		}
+		// this is the code for attacking, the third portion of the compound
+		// boolean part isn't working right and idk why
+		else if (getPlayer() == 1
+				&& (to.equals(new Location(from.row + 1, from.column - 1))
+						|| to.equals(new Location(from.row + 1, from.column + 1)))
+				&& (b[to.row][to.column].getPlayer() == -1)) {
+			System.out.println("tRRue");
+			return true;
+		} else if (getPlayer() == -1
+				&& (to.equals(new Location(from.row - 1, from.column - 1))
+						|| to.equals(new Location(from.row + 1, from.column - 1)))
+				&& !(b[to.row][to.column].getPlayer() == 1)) {
+			System.out.println("FalsE");
+			return false;
+		}
+
+		else if(getPlayer()==-1 && to.equals(new Location(from.row-1, from.column+1)) && b[from.row-1][from.column+1].getPlayer() ==0){
+			System.out.println("fAAAAAlse");
+			return false;
+		}
+		
+		// same problem as above
+		else if (getPlayer() == -1 && to.equals(new Location(from.row - 1, from.column + 1))
+				|| to.equals(new Location(from.row - 1, from.column - 1)) && (b[to.row][to.column].getPlayer() == 1)) {
+			System.out.println("true");
+			return true;
+		}
+//col+1
+//row-1
+	
+		
+		
+		else if (getPlayer() == 1 && !(to.equals(new Location(from.row + 1, from.column))
+				|| to.equals(new Location(from.row + 2, from.column))
+				|| to.equals(new Location(from.row + 1, from.column - 1))
+				|| to.equals(new Location(from.row + 1, from.column + 1)))) {
+			System.out.println("FAlse");
+			return false;
+
+		} 
+		
+		else if (getPlayer() == 1 && to.equals(new Location(from.row, from.column + 2)) && from.column != 1
+		/* || b[to.row][to.column].getPlayer() != 0 */) {
+			System.out.println("fALse");
+			return false;
+
+		} 
+		
+		else if (getPlayer() == 1 && to.equals(new Location(from.row + 1, from.column))
+				&& b[to.row][to.column].getPlayer() != 0) {
+			System.out.println("faLSe");
+			return false;
+		}
+
+		else if (getPlayer() == -1 && (to.equals(new Location(from.row - 1, from.column + 1))
+
+		/* && (b[to.row][to.column].getPlayer() != 1) */)) {
+			System.out.println("FalsE");
+			return false;
+		}
+
+		// this works
+
+		else if (getPlayer() == -1 && !(to.equals(new Location(from.row - 1, from.column))
+				|| to.equals(new Location(from.row - 2, from.column))
+				|| to.equals(new Location(from.row - 1, from.column - 1))
+				|| to.equals(new Location(from.row - 1, from.column + 1)))) {
+			System.out.println("fAlse");
+			return false;
+		} 
+		
+		else if (getPlayer() == 1 && to.equals(new Location(from.row + 2, from.column)) && b[from.row+1][from.column].getPlayer() == -1){
+			System.out.println("FFFFFFFalse");	
+			return false; 
+		}
+		
+		else if (getPlayer() == -1 && to.equals(new Location(from.row - 2, from.column)) && b[from.row-1][from.column].getPlayer() == 1){
+			System.out.println("FFFFFFFalsEEEEEEEE");	
+			return false; 
+		}
+		
+		else if (getPlayer() == -1 && to.equals(new Location(from.row - 2, from.column)) && from.row != 6
+				&& !(b[5][from.column].getPlayer() == 1) || b[to.row][to.column].getPlayer() != 0) {
+			System.out.println("faaaLse");
+			return false;
+		} 
+		
+		else if (getPlayer() == -1 && to.equals(new Location(from.row - 1, from.column))
+				&& b[to.row][to.column].getPlayer() != 0) {
+			System.out.println("falSe");
+			return false;
+		} 
+		
+		else if ((getPlayer() == -1) && (to.equals(new Location(from.row + 1, from.column + 1)))
+				&& b[to.row][to.column].getPlayer() == 0) {
+			System.out.println("fAlSe");
+			return false;
+		}
+		
+		else if (getPlayer() == 1 && to.equals(new Location(from.row + 2, from.column)) && from.row != 1
+				|| b[to.row][to.column].getPlayer() != 0) {
+			System.out.println("faLSEE");
+			return false;
+		}
+
+		System.out.println("TruE");
+		return true;
