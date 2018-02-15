@@ -42,15 +42,16 @@ public class Bishop extends Piece {
 		}
 		//up and left
 		else if (to.getColumn()<from.getColumn() && to.getRow()<from.getRow() && from.row - from.column == to.row - to.column){
-			column = from.column - 1;
+			column = from.column;
 			System.out.println("c");
-			for(row = from.getRow() - 1; row >= 0 && b[row][column].getPlayer() == 0; row--){
-				column = from.column + from.getRow() - row;
-				System.out.println(new Location(row, column));
+			for(row = from.getRow() - 1; row >= 0 && b[row][column-1].getPlayer() == 0; row--){
+				column = from.column - from.getRow() + row;
+				System.out.println(new Location(row, column) + " " + b[row][column].getPlayer());
 				if(to.equals(new Location(row, column))){
 					return true;
 				}
 			}	
+			System.out.println(row + ", " + column + " " + b[row][column].getPlayer());
 			return false;
 		}
 		//down and right
