@@ -55,7 +55,7 @@ public class Piece {
 	// @param - Piece[][]b - the chess board.  a two dimensional array of pieces.
 	// return - boolean - true if the move is valid 
 	public boolean isValidMove(Location from, Location to, Piece[][]b){
-		return true;
+		return false;
 	}
 	
 	// method: draw
@@ -65,8 +65,8 @@ public class Piece {
 	//			   Component c - this is the component that the image will be drawn onto.
 	//			   Location l - a Location that determines where to draw the piece.
 	public void draw(Graphics g, Component c, Location l) {
-        image.paintIcon(c, g, (l.column+34)+(90*l.column), (l.row+28)+(90*l.row)); // you'll need to update the last two parameters so that it will 
-        										   	  // correctly draw the piece in the right location.
+        image.paintIcon(c, g, (l.column+34)+(90*l.column), (l.row+28)+((90*l.row))); // you'll need to update the last two parameters so that it will 
+        											  // correctly draw the piece in the right location.
     }
 
 	public int getPlayer() {

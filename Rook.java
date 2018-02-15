@@ -1,20 +1,18 @@
-public class Rook extends Piece{
-	
-	//Constructors
-	public Rook(){
+public class Rook extends Piece {
+
+	public Rook() {
 		super(0, "rook1.png");
 	}
-	
-	public Rook(int player){
+
+	public Rook(int player) {
 		super(0);
 	}
-	
-	public Rook(int player, String imagepath){
+
+	public Rook(int player, String imagepath) {
 		super(player, imagepath);
 	}
-	
-	//isValidMove
-	public boolean isValidMove(Location from, Location to, Piece[][]b){
+
+	public boolean isValidMove(Location from, Location to, Piece[][] b){
 		boolean finalLocation = false;
 		boolean verticalUp = false, verticalDown = false, horizontalLeft = false, horizontalRight = false;
 
@@ -66,7 +64,7 @@ public class Rook extends Piece{
 			}
 		}
 		
-		if(verticalUp || verticalDown || horizontalLeft || horizontalRight && finalLocation){
+		if((verticalUp || verticalDown || horizontalLeft || horizontalRight && finalLocation) && b[to.row][to.column].getPlayer() != getPlayer()){
 			return true;
 		}
 		else

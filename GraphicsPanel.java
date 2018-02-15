@@ -14,6 +14,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.Color;
 import javax.swing.JPanel;
+import java.io.*;
 
 public class GraphicsPanel extends JPanel implements MouseListener {
 
@@ -31,30 +32,23 @@ public class GraphicsPanel extends JPanel implements MouseListener {
 	private Piece[][] board; // an 8x8 board of 'Pieces'. Each spot should be
 								// filled by one of the chess pieces or a
 								// 'space'.
-
 	private int turn;
-	
-	private Location colorSquare;
-	
+	private boolean toIsValid;
 
 	public GraphicsPanel() {
 		setPreferredSize(new Dimension(SQUARE_WIDTH * 8 + OFFSET + 2, SQUARE_WIDTH * 8 + OFFSET + 2)); // Set
 																										// these
-																										// dimensions
-																										// to
-																										// the
-																										// width
+
+		toIsValid = true;
+		// dimensions
+		// to
+		// the
+		// width
+		// of your background picture.
 
 		click = false;
-		from = new Location(0, 0);
-		to = new Location(0, 0);
-
 		turn = 1;
-		
 
-		colorSquare = new Location(5000,5000);
-		
-		// of your background picture.
 		this.setFocusable(true); // for keylistener
 		this.addMouseListener(this);
 
@@ -91,8 +85,6 @@ public class GraphicsPanel extends JPanel implements MouseListener {
 		board[7][5] = new Bishop(-1, "images2/bishop2.png");
 		board[7][6] = new Knight(-1, "images2/knight2.png");
 		board[7][7] = new Rook(-1, "images2/rook2.png");
-
-		// instantiate the instance variables.
 	}
 
 	// method: paintComponent
@@ -104,11 +96,8 @@ public class GraphicsPanel extends JPanel implements MouseListener {
 	public void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 
-		g2.setColor(Color.green);
-		g2.fillRect(0, 0, 750, 750);
-
 		// Draw the board
-		g2.setColor(Color.yellow);
+		g2.setColor(Color.gray);
 		g2.drawLine(SQUARE_WIDTH * 8 + OFFSET, OFFSET, SQUARE_WIDTH * 8 + OFFSET, SQUARE_WIDTH * 8 + OFFSET);
 		g2.drawLine(OFFSET, SQUARE_WIDTH * 8 + OFFSET, SQUARE_WIDTH * 8 + OFFSET, SQUARE_WIDTH * 8 + OFFSET);
 		g2.drawLine(OFFSET, OFFSET, SQUARE_WIDTH * 8 + OFFSET, 0 + OFFSET);
@@ -116,104 +105,69 @@ public class GraphicsPanel extends JPanel implements MouseListener {
 
 		for (int i = 0; i < 8; i += 2)
 			for (int j = 0; j < 8; j += 2) {
-				g2.setColor(Color.yellow);
+				g2.setColor(Color.gray);
 				g2.fillRect(i * SQUARE_WIDTH + OFFSET, j * SQUARE_WIDTH + OFFSET, SQUARE_WIDTH, SQUARE_WIDTH);
 			}
 
 		for (int i = 1; i < 8; i += 2)
 			for (int j = 1; j < 8; j += 2) {
-				g2.setColor(Color.pink);
+				g2.setColor(Color.gray);
 				g2.fillRect(i * SQUARE_WIDTH + OFFSET, j * SQUARE_WIDTH + OFFSET, SQUARE_WIDTH, SQUARE_WIDTH);
 			}
 
-		if((turn == board[from.getRow()][from.getColumn()].getPlayer())){
-		g2.setColor(Color.magenta);
-		g2.fillRect((colorSquare.getColumn()*90)+30, (colorSquare.getRow()*90)+30, 90, 90);
+		try {
+			if ((turn == board[from.getRow()][from.getColumn()].getPlayer())) {
+				g2.setColor(Color.yellow);
+				g2.fillRect((from.getColumn() * 90) + 30, (from.getRow() * 90) + 30, 90, 90);
+			}
+		} catch (Exception e) {
+
 		}
-		
+
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
 				board[i][j].draw(g2, this, new Location(i, j));
 			}
 		}
 
-		
-		
-		// if(board[])
-
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 
-		// use math to figure out the row and column that was clicked.
-		System.out.println("x = " + e.getX());
-		System.out.println("y = " + e.getY());
-		System.out.println("row = " + (((e.getY() + 60) / 90) - 1));
-		System.out.println("column = " + (((e.getX() + 60) / 90) - 1));
+		if (click == false) {
+			from = new Location(((e.getY() - OFFSET) / SQUARE_WIDTH), ((e.getX() - OFFSET) / SQUARE_WIDTH));
+			System.out.println("from:" + (e.getX() - OFFSET) / SQUARE_WIDTH + (e.getY() - OFFSET) / SQUARE_WIDTH);
+			if (turn == board[from.getRow()][from.getColumn()].getPlayer()) {
+				click = true;
+			}
+			
 
-		// from = new Location((((e.getX() + 60) / 90) - 1), (((e.getY() + 60) /
-		// 90) - 1));
-		// to = new Location((((e.getX() + 60) / 90) - 1), (((e.getY() + 60) /
-		// 90) - 1));
+		} else if (click == true) {		
+			to = new Location(((e.getY() - OFFSET) / SQUARE_WIDTH), ((e.getX() - OFFSET) / SQUARE_WIDTH));
+			
+			if(board[to.getRow()][to.getColumn()].getPlayer() == board[from.getRow()][from.getColumn()].getPlayer()){
+				from = to;
+				toIsValid=false;
+			}
+			else{
+				toIsValid=true;
+			}
+			
+			if(toIsValid == true){
+			System.out.println("to:" + (e.getX() - OFFSET) / SQUARE_WIDTH + (e.getY() - OFFSET) / SQUARE_WIDTH);
+				if (click == true && board[from.getRow()][from.getColumn()].isValidMove(from, to, board)) {
+				turn *= -1;
 
-		if (click && (turn == board[from.getRow()][from.getColumn()].getPlayer())) {
-
-			to = new Location((((e.getY() + 60) / 90) - 1), (((e.getX() + 60) / 90) - 1));
-
-			System.out.println("to row = " + (((e.getY() + 60) / 90) - 1));
-			System.out.println("to column = " + (((e.getX() + 60) / 90) - 1));
-			System.out.println(to.getRow());
-			System.out.println(to.getColumn());
-
-			if (board[(((e.getY() + 60) / 90) - 1)][(((e.getX() + 60) / 90) - 1)].isValidMove(to, from, board)
-					) {
-				
-	
-				System.out.println(board[from.getRow()][from.getColumn()].getPlayer()*-1);
-				turn*=-1;
-				
 				board[to.getRow()][to.getColumn()] = board[from.getRow()][from.getColumn()];
 				board[from.getRow()][from.getColumn()] = new Piece(0, "images2/space.png");
-	
-					click = false;
+
+				click = false;
+				}
 			}
-
-		
-			
-
 		}
-
-		else {
-
-			from = new Location((((e.getY() + 60) / 90) - 1), (((e.getX() + 60) / 90) - 1));
-			colorSquare = new Location((((e.getY() + 60) / 90) - 1), (((e.getX() + 60) / 90) - 1));
-			this.repaint();
-			
-			System.out.println(board[from.getRow()][from.getColumn()].getPlayer()*-1);
-			
-			System.out.println("from row = " + (((e.getY() + 60) / 90) - 1));
-			System.out.println("from column = " + (((e.getX() + 60) / 90) - 1));
-			System.out.println(from.getRow());
-			System.out.println(from.getColumn());
-			click = true;
-
-		}
-
-		// if(board[(((e.getX()+60)/90)-1)][(((e.getY()+60)/90)-1)].isValidMove(from,
-		// to, board)){
-		// board[(((e.getX()+60)/90)-1)][(((e.getY()+60)/90)-1)].set(new Piece
-		// (0, "images2/space.png");
-		// }
 
 		this.repaint();
-
-		// from = (new Location(e.getX(), e.getY()));
-		//
-		// System.out.println(from.getRow() + " " + from.getColumn());
-		//
-		// to = new Location(e.getX(), e.getY());
-
 	}
 
 	@Override
