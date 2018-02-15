@@ -26,10 +26,11 @@ public class King extends Piece {
 	//			   Piece [][]b - the 2D array that contains the pieces for the board
 	// Description: Overrides piece class' isValidMove method so it is accurate for the King piece
 	public boolean isValidMove(Location from, Location to, Piece[][] b) {
-		if ((to.row == (from.row) || to.row == (from.row + 1) || to.row == (from.row - 1))
-				&& (to.column == (from.column) || to.column == (from.column + 1) || to.column == (from.column - 1))
-				&& !(from.row == to.row && from.column == to.column)
-				&& b[to.row][to.column].getPlayer() != getPlayer()) {
+		if ((to.row == (from.row) || to.row == (from.row + 1) || to.row == (from.row - 1))								//First, checks to see which way the king is going, horizontally speaking.
+				&& (to.column == (from.column) || to.column == (from.column + 1) || to.column == (from.column - 1))		//Then checks the up-and-down...
+				&& !(from.row == to.row && from.column == to.column)													//and then makes sure that the piece isn't just staying in place.
+				&& b[to.row][to.column].getPlayer() != getPlayer()) {													//Lastly, it checks the destination to make sure it's either an
+																														//opposing piece or a blank space.
 			return true;
 		} else {
 			return false;
