@@ -15,16 +15,8 @@ public class Rook extends Piece{
 	
 	//isValidMove
 	public boolean isValidMove(Location from, Location to, Piece[][]b){
-		boolean finalLocation = false;
         boolean verticalUp = false, verticalDown = false, horizontalLeft = false, horizontalRight = false;
 
-        //This line checks to see if the final destination of the piece contains anything but a friendly piece. This is here, because
-        //anything other than a friendly piece would make the move valid, given that every space in between is blank.
-        if(b[to.getRow()][to.getColumn()].getPlayer() != b[from.getRow()][from.getColumn()].getPlayer())
-            finalLocation = true;
-        else
-            finalLocation = false;
-     
         //verticalUp
         if(from.getColumn() == to.getColumn() && from.getRow() > to.getRow()){
             verticalUp = true;
@@ -33,7 +25,7 @@ public class Rook extends Piece{
                 	//do nothing
                 }
                 else
-                    return false;
+                    verticalUp = false;
             }
         }
         //verticalDown
@@ -44,7 +36,7 @@ public class Rook extends Piece{
                 	//do nothing
                 }
                 else
-                	return false;
+                	verticalDown = false;
             }
         }
         //horizontalLeft
@@ -55,7 +47,7 @@ public class Rook extends Piece{
         			//do nothing
         		}
         		else
-        			return false;
+        			horizontalLeft = false;
         	}
         }
         //horizontalRight
@@ -66,11 +58,11 @@ public class Rook extends Piece{
         			//do nothing
         		}
         		else
-        			return false;
+        			horizontalRight = false;
         	}
         }
         
-        if(verticalUp || verticalDown || horizontalLeft || horizontalRight && finalLocation){
+        if(verticalUp || verticalDown || horizontalLeft || horizontalRight && b[to.getRow()][to.getColumn()].getPlayer() != b[from.getRow()][from.getColumn()].getPlayer()){
             return true;
         }
         else
