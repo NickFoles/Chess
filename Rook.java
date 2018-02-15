@@ -30,7 +30,7 @@ public class Rook extends Piece{
             verticalUp = true;
             for(int i = to.getRow(); i < from.getRow() && verticalUp; i++){
                 if(b[i][to.getColumn()].getPlayer() == 0){
-                    verticalUp = true;
+                	//do nothing
                 }
                 else
                     return false;
@@ -41,14 +41,24 @@ public class Rook extends Piece{
         	verticalDown = true;
             for(int i = to.getRow(); i > from.getRow() && verticalDown; i--){
                 if(b[i][from.getColumn()].getPlayer() == 0){
-                	verticalDown = true;
+                	//do nothing
                 }
                 else
                 	return false;
             }
         }
+        else if(from.getRow() == to.getRow() && from.getColumn() > to.getColumn()){
+        	horizontalLeft = true;
+        	for(int i = to.getColumn(); i < from.getColumn() && horizontalLeft; i++){
+        		if(b[from.getRow()][i].getPlayer() == 0){
+        			//do nothing
+        		}
+        		else
+        			return false;
+        	}
+        }
         
-        if(verticalUp || verticalDown && finalLocation){
+        if(verticalUp || verticalDown || horizontalLeft && finalLocation){
             return true;
         }
         else
