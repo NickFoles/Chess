@@ -1,18 +1,20 @@
-public class Rook extends Piece {
-
-	public Rook() {
+public class Rook extends Piece{
+	
+	//Constructors
+	public Rook(){
 		super(0, "rook1.png");
 	}
-
-	public Rook(int player) {
+	
+	public Rook(int player){
 		super(0);
 	}
-
-	public Rook(int player, String imagepath) {
+	
+	public Rook(int player, String imagepath){
 		super(player, imagepath);
 	}
-
-	public boolean isValidMove(Location from, Location to, Piece[][] b){
+	
+	//isValidMove
+	public boolean isValidMove(Location from, Location to, Piece[][]b){
 		boolean finalLocation = false;
 		boolean verticalUp = false, verticalDown = false, horizontalLeft = false, horizontalRight = false;
 
@@ -23,54 +25,55 @@ public class Rook extends Piece {
 		else
 			finalLocation = false;
 		
-		//horizontal left
+		//verticalUp
 		if(from.getRow() == to.getRow() && from.getColumn() > to.getColumn()){
-			for(int i = to.getColumn(); i <= from.getColumn(); i++){
-				if(b[to.getRow()][i].getPlayer() != 0){
-					horizontalLeft = false;
-				}
-				else
-					horizontalLeft = true;
-			}
-		}
-		//horizontal right
-		else if(from.getRow() == to.getRow() && from.getColumn() < to.getColumn()){
-			for(int i = from.getColumn(); i <= to.getColumn(); i++){
-				if(b[from.getRow()][i].getPlayer() != 0){
-					horizontalRight = false;
-				}
-				else
-					horizontalRight = true;
-			}
-		}
-		//vertical up
-		else if(from.getColumn() == to.getColumn() && from.getRow() > to.getRow()){
-			for(int i = to.getRow(); i <= from.getRow(); i++){
-				if(b[i][to.getColumn()].getPlayer() != 0){
-					verticalUp = false;
-				}
-				else
+			verticalUp = true;
+			for(int i = to.getColumn(); i < from.getColumn() && verticalUp; i++){
+				if(b[to.getRow()][i].getPlayer() == 0 && verticalUp){
 					verticalUp = true;
-			}
-		}
-		//vertical down
-		else if(from.getColumn() == to.getColumn() && from.getRow() < to.getRow()){
-			for(int i = from.getRow(); i <= to.getRow()+1; i++){
-				if(b[i][from.getColumn()].getPlayer() != 0){
-					verticalDown = false;
 				}
-				
 				else
+					verticalUp = false;
+			}
+		}
+		//verticalDown
+		else if(from.getRow() == to.getRow() && from.getColumn() < to.getColumn()){
+			verticalDown = true;
+			for(int i = from.getColumn(); i < to.getColumn() && verticalDown; i++){
+				if(b[from.getRow()][i].getPlayer() == 0 && verticalDown){
 					verticalDown = true;
+				}
+				else
+					verticalDown = false;
+			}
+		}
+		//horizontalLeft
+		else if(from.getColumn() == to.getColumn() && from.getRow() > to.getRow()){
+			horizontalLeft = true;
+			for(int i = to.getRow(); i < from.getRow() && horizontalLeft; i++){
+				if(b[i][to.getColumn()].getPlayer() == 0 && horizontalLeft){
+					horizontalLeft = true;
+				}
+				else
+					horizontalLeft = false;
+			}
+		}
+		//horizontalRight
+		else if(from.getColumn() == to.getColumn() && from.getRow() < to.getRow()){
+			horizontalRight = true;
+			for(int i = from.getRow(); i < to.getRow() && horizontalRight; i++){
+				if(b[i][from.getColumn()].getPlayer() == 0 && horizontalRight){
+					horizontalRight = true;
+				}
+				else
+					horizontalRight = false;
 			}
 		}
 		
-		
-		if((verticalUp || verticalDown || horizontalLeft || horizontalRight) && finalLocation){
+		if(verticalUp || verticalDown || horizontalLeft || horizontalRight && finalLocation){
 			return true;
 		}
 		else
 			return false;
-	
 	}
 }
